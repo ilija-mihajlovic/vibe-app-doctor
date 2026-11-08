@@ -104,7 +104,7 @@
           const write = ['insert', 'update', 'delete', 'all'].includes(operation)
           push(file, write ? 'high' : 'medium', `Overly broad ${operation} policy for ${role}`, 'A true policy grants access without checking who owns the row or what is being changed.', 'Replace true with an ownership or role condition. For writes, use a matching with check condition as well.', policy.index, 'using (auth.uid() = user_id) with check (auth.uid() = user_id)', `true-policy-${policy.index}`)
         }
-        const missingCheck = /create\s+policy\s+[\s\S]*?\s+for\s+(insert|update)\b[\s\S]*?(?=;|$)/ig
+        const missingCheck = /create\s+policy\s+[^;]*?\s+for\s+(insert|update)\b[^;]*/ig
         let noCheck
         while ((noCheck = missingCheck.exec(text))) if (!/with\s+check/i.test(noCheck[0])) push(file, 'medium', `Write policy is missing WITH CHECK`, 'A policy that controls visibility does not by itself validate new or changed row values.', 'Add a with check expression that enforces the same ownership rule as using.', noCheck.index, 'with check (auth.uid() = user_id)', `missing-check-${noCheck.index}`)
         const fnRe = /create\s+(?:or\s+replace\s+)?function[\s\S]*?security\s+definer[\s\S]*?(?=\$\$|;)/ig

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A private, offline review of common security and reliability mistakes in AI built apps.">
+  <title>Vibe App Doctor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Vibe App Doctor home">
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 42 11v11c0 11-7.7 18.7-18 22C13.7 40.7 6 33 6 22V11l18-7Z" fill="currentColor"/><path d="m15 24 6 6 13-14" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Vibe App Doctor</span>
+    </a>
+    <span class="offline-pill"><span></span> Runs in your browser</span>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Private by design</p>
+        <h1>Find the cracks in your AI built app.</h1>
+        <p class="lede">Paste files from a Lovable, Cursor, Bolt, or Base44 style project. Get a clear security and reliability review without sending code anywhere.</p>
+      </div>
+      <div class="hero-badge" aria-label="Offline analysis illustration"><span>✦</span><strong>17 checks</strong><small>security and reliability</small></div>
+    </section>
+
+    <section class="workbench" aria-labelledby="input-heading">
+      <div class="section-head"><div><p class="eyebrow">01 / Paste your files</p><h2 id="input-heading">What should we look at?</h2></div><button id="example" class="button secondary" type="button">Load example</button></div>
+      <label class="sr-only" for="input">Paste one or more files</label>
+      <textarea id="input" spellcheck="false" placeholder="--- src/integrations/supabase/client.ts ---\nconst supabase = createClient(...)\n\n--- supabase/migrations/001_init.sql ---\ncreate table public.notes (...)"></textarea>
+      <div class="input-footer"><span>Separate files with <code>--- path/to/file.ext ---</code>. Nothing leaves this page.</span><button id="analyze" class="button primary" type="button">Run the review <span aria-hidden="true">→</span></button></div>
+    </section>
+
+    <section id="results" class="results" aria-live="polite" hidden>
+      <div class="section-head results-head"><div><p class="eyebrow">02 / Your report</p><h2>Health check</h2></div><div class="result-actions"><button id="copy" class="button secondary" type="button">Copy markdown</button><button id="print" class="button secondary" type="button">Print report</button></div></div>
+      <div id="summary" class="summary"></div>
+      <div class="filters" aria-label="Filter findings"><span>Show:</span><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="critical">Critical</button><button class="filter" data-filter="high">High</button><button class="filter" data-filter="medium">Medium</button><button class="filter" data-filter="info">Info</button></div>
+      <div id="findings" class="finding-groups"></div>
+    </section>
+
+    <section class="service" aria-labelledby="service-heading">
+      <div><p class="eyebrow">03 / If you want help fixing it</p><h2 id="service-heading">What you get with this service</h2><p class="service-note">This tool is a free sample. It cannot replace testing the live app, its auth flows, or its deployment configuration.</p></div>
+      <div class="service-grid"><ul><li>Security review of your app</li><li>Fixes applied in your repo</li><li>RLS policies written and tested</li><li>A short report you can share</li></ul><ol><li><strong>Review</strong><span>We inspect the risky paths and data access.</span></li><li><strong>Fix</strong><span>We make the smallest safe changes.</span></li><li><strong>Test</strong><span>We run checks against the app and policies.</span></li><li><strong>Hand off</strong><span>You get the changes and a plain report.</span></li></ol></div>
+    </section>
+  </main>
+  <footer><span>Vibe App Doctor</span><span>Local first. No runtime network requests.</span></footer>
+  <script src="rules.js"></script><script src="app.js"></script>
+</body>
+</html>
